@@ -1,0 +1,662 @@
+html, body {
+	height: 100%;
+	width: 100%;
+	margin: 0;
+	padding: 0;
+	font-family: 'Roboto', sans-serif;
+	background: white;
+}
+::selection {
+	color: #00796B;
+	background: #1de986;
+}
+/*
+orange 300 #FFD54F
+orange 500 #FFC107
+orange 800 #FF8F00
+orange 900 #FF6F00
+orange A100 #FFE57F
+text rgba(0,0,0,.87)
+text2 rgba(0,0,0,.54)
+disabled rgba(0,0,0,.38)
+dividers rgba(0,0,0,.12)
+offwhite #FAFAFA
+*/
+/*::-webkit-scrollbar {
+    width: 14px;
+}
+::-webkit-scrollbar-track {
+    -webkit-box-shadow: inset 0 0 8px rgba(0,0,0,0.7);
+    background: #243135;
+}
+::-webkit-scrollbar-thumb {
+    background-color: #1DE96B;
+}*/
+input:active,
+input:focus,
+select:focus,
+select:active {
+	outline: 0 none;
+}
+input {
+    border: none;
+    margin: 0;
+    padding: 0;
+}
+.nosel {
+	-webkit-touch-callout: none;
+ -webkit-user-select: none;
+ -khtml-user-select: none;
+ -moz-user-select: none;
+ -ms-user-select: none;
+ user-select: none;
+}
+.btn {
+    border: none;
+    outline: 0 none;
+    color: white;
+    cursor: pointer;
+    transition: all .15s ease;
+}
+.btn-default {
+    background: #45545c;
+}
+.btn-positive {
+    background: #1de96b;
+}
+.btn-negative {
+    background: #d4455e;
+}
+.btn-default:hover {
+    background: #61747e;
+}
+.btn-positive:hover {
+    background: #91fab9;
+}
+.btn-negative:hover {
+    background: #90283a;
+}
+.float, 
+.float-1 {
+    box-shadow: 0 -1px 0 #e5e5e5,0 0 2px rgba(0,0,0,.12),0 2px 4px rgba(0,0,0,.24);
+}
+.float-2 {
+    box-shadow: 0 0 4px rgba(0,0,0,.14),0 4px 8px rgba(0,0,0,.28);
+}
+.float-3 {
+    box-shadow: 0 8px 17px 0 rgba(0,0,0,0.2),0 6px 20px 0 rgba(0,0,0,0.19);
+}
+a {
+    text-decoration: none;
+    color: #FF6F00;
+    transition: all .15s ease;
+}
+/*a:hover,
+a:focus {
+    color: #517ee8;
+}*/
+header#header-main {
+    background: #FF6F00;
+    height: 108px;
+    width: 100%;
+    margin: 0;
+    padding: 0;
+    z-index: 10;
+    position: fixed;
+}
+.nav-horiz {
+    position: absolute;
+    height: 60px;
+    line-height: 60px;
+    vertical-align: middle;
+    margin: 0;
+}
+#nav-top {
+    top: 0;
+    right: 20px;
+}
+#nav-main {
+    top: 60px;
+    left: 40px;
+    height: 46px;
+    line-height: 46px;
+    right: 40px;
+    display: flex;
+}
+.nav-horiz ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    float: right;
+}
+.nav-horiz li {
+    display: inline-block;
+    padding: 0 24px;
+    color: white;
+    font-size: 13pt;
+    cursor: pointer;
+    transition: all .15s ease;
+}
+.nav-horiz li:hover {
+    color: #FFD54F !important;
+}
+/*.nav-horiz#nav-main li:first-of-type {
+    padding-left: 0;
+}
+.nav-horiz#nav-main li:last-of-type {
+    padding-right: 0;
+}*/
+.nav-horiz li a {
+    display: inline-block;
+    color: white;
+    height: 60px;
+    line-height: 60px;
+    width: 100%;
+}
+.nav-horiz li a:hover {
+    color: #FFD54F;
+}
+#nav-main ul {
+    float: left;
+    margin-right: 40px;
+}
+#nav-main li {
+    color: rgba(255,255,255,.7);
+}
+#nav-main li.active {
+    border-bottom: 2px solid #FFD54F;
+    color: white;
+}
+#nav-main li a {
+    height: 48px;
+    line-height: 48px;
+}
+#nav-main .ticket-search {
+    float: right;
+    position: relative;
+    height: 48px;
+    line-height: 48px;
+    min-width: 150px;
+    display: flex;
+    flex: 1;
+}
+#nav-main .input-search {
+    position: relative;
+    margin: 6px 0;
+    height: 36px;
+    line-height: 36px;
+    width: 100%;
+    background: rgba(255,255,255,.15);
+    text-indent: 60px;
+    font-size: 100%;
+    transition: all .15s ease-in-out;
+}
+#nav-main .input-search:focus {
+    background: white;
+    color: rgba(0,0,0,.87);
+}
+#nav-main .input-text-icon {
+    position: absolute;
+    left: 20px;
+    top: 6px;
+    height: 36px;
+    line-height: 36px;
+}
+#nav-main .input-text-placeholder {
+    height: 36px;
+    line-height: 36px;
+    color: rgba(255,255,255,.7);
+    position: absolute;
+    top: 6px;
+    left: 60px;
+    cursor: text;
+    transition: all .15s ease-in-out;
+}
+#nav-main .input-search:focus + .input-text-icon i,
+#nav-main .input-search:focus ~ .input-text-placeholder {
+    color: rgba(0,0,0,.87);
+}
+#nav-main .input-text-icon i {
+    height: 36px;
+    line-height: 36px;
+    color: rgba(255,255,255,.7);
+    transition: all .15s ease-in-out;
+    pointer-events: none;
+}
+#header-main .title {
+    display: inline-block;
+    height: 60px;
+    line-height: 60px;
+    font-size: 30pt;
+    color: white;
+    padding: 0 64px;
+}
+#header-main #redfox {
+    color: #FFD54F;
+}
+#nav-sub {
+    top: 108px;
+    left: 0;
+    height: 48px;
+    line-height: 48px;
+    width: 100%;
+    background: #FF6F00;
+    z-index: 9;
+    padding: 0 40px;
+}
+#nav-sub ul {
+    float: left;
+    height: 46px;
+}
+#nav-sub li {
+    height: 46px;
+}
+#nav-sub li.active {
+    border-bottom: 2px solid #FFE57F;
+}
+main {
+    position: absolute;
+    min-height: calc(100% - 108px - 40px);
+    /*min-height: calc(100% - 40px);*/
+    width: calc(100% - 40px);
+    padding: 20px;
+    padding-top: 128px;
+}
+.nav-small {
+    padding: 10px 20px;
+    min-height: 20px;
+    /*background: #FF6F00;*/
+}
+.text-hint {
+    color: rgba(0,0,0,.54);
+}
+.ticket-navs {
+    position: relative;
+}
+.ticket-navs::before {
+    content: '';
+    position: absolute;
+    display: block;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    pointer-events: none;
+    box-shadow: 0 -1px 0 #e5e5e5,0 0 2px rgba(0,0,0,.12),0 2px 4px rgba(0,0,0,.24);
+}
+.ticket-container {
+    position: relative;
+    display: block;
+    height: 100%;
+    width: 100%;
+    background: white;
+}
+.ticket-container .ticket-search {
+    float: right;
+    width: 25%;
+    margin-top: -10px;
+    height: 40px;
+}
+.ticket-container .input-search {
+    width: calc(100% - 45px);
+    margin-top: 5px;
+    height: 28px;
+    display: inline-block;
+    float: left;
+    font-size: 12.5pt;
+    text-indent: 10px;
+    border: 1px solid #FFE57F;
+    transition: all .15s ease;
+}
+.ticket-container .input-search:focus {
+    background: rgba(0,0,0,.03);
+}
+.ticket-container .btn-search {
+    width: 40px;
+    height: 30px;
+    padding-top: 4px;
+    margin-top: 5px;
+    display: inline-block;
+    float: left;
+    background: #FFE57F;
+    color: rgba(0,0,0,.87);
+}
+.tickets-list {
+    position: relative;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+}
+.tickets-header span {
+    display: inline-block;
+}
+.tickets-header .id {
+    width: 98px;
+    margin-right: 20px;
+}
+.tickets-header .status {
+    float: right;
+    width: 78px;
+    margin-right: 20px;
+}
+.tickets-header .priority {
+    float: right;
+    width: 78px;
+    margin-left: 20px;
+    margin-right: 266px;
+}
+.ticket {
+    position: relative;
+    background: white;
+    width: calc(100% - 40px);
+    /*border-top: 1px solid rgba(0,0,0,.12);*/
+    height: 64px;
+    line-height: 64px;
+    vertical-align: middle;
+    padding: 0 20px;
+    cursor: pointer;
+    /*background: lightblue;*/
+    transition: all .15s ease-in-out;
+}
+.ticket:not(.open) .d-open {
+    display: none;
+}
+.ticket.open .d-closed {
+    display: none;
+}
+/*.ticket:not(.open):hover {
+    background: rgba(255, 111, 0, .2);
+}*/
+.ticket::before {
+    content: '';
+    position: absolute;
+    display: block;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    pointer-events: none;
+    box-shadow: 0 -1px 0 #e5e5e5,0 0 2px rgba(0,0,0,.12),0 2px 4px rgba(0,0,0,.24);
+}
+.ticket.open {
+    /*content: '';
+    position: absolute;
+    display: block;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    pointer-events: none;*/
+    box-shadow: 0 0 6px rgba(0,0,0,.16),0 6px 12px rgba(0,0,0,.32);
+}
+/*.ticket:last-of-type {
+    height: 64px;
+    line-height: 64px;
+    border: none;
+}*/
+.ticket .id {
+    float: left;
+    color: rgba(0,0,0,.54);
+    display: inline;
+    margin-right: 20px;
+    width: 98px;
+    height: 64px;
+    line-height: 64px;
+}
+.ticket .status {
+    float: right;
+    /*float: left;*/
+    text-transform: uppercase;
+    padding: 4px 10px;
+    height: 20px;
+    line-height: 20px;
+    min-width: 78px;
+    text-align: center;
+    border-radius: 6px;
+    /*margin: 17px 20px;*/
+    margin: 17px 20px 17px 0;
+    color: rgba(0,0,0,.87);
+}
+.ticket .status-new {
+    background: #42A5F5;
+    color: white;
+}
+.ticket .status-open {
+    background: #8BC34A;
+    color: white;
+}
+.ticket .status-solved {
+    background: #BDBDBD;
+    color: white;
+}
+.ticket .status-hold {
+    background: #7986CB;
+    color: white;
+}
+.ticket .priority {
+    float: right;
+    /*float: left;*/
+    text-transform: uppercase;
+    padding: 4px 10px;
+    height: 20px;
+    min-width: 78px;
+    text-align: center;
+    line-height: 20px;
+    border-radius: 6px;
+    /*margin: 17px 20px;*/
+    margin: 17px 20px 17px 0;
+    color: rgba(0,0,0,.87);
+}
+.ticket .priority-low {
+    background: #8BC34A;
+    color: white;
+}
+.ticket .priority-normal {
+    background: #FFEE58;
+    color: white;
+}
+.ticket .priority-high {
+    background: #FFA726;
+    color: white;
+}
+.ticket .priority-urgent {
+    background: #F44336;
+    color: white;
+}
+.ticket .vertbox {
+    height: 64px;
+    display: inline-block;
+    margin: 0;
+    padding: 0;
+    /*background: gray;*/
+}
+.ticket .name {
+    display: block;
+    margin-top: 12px;
+    height: 20px;
+    line-height: 20px;
+    /*width: 100%;*/
+    color: rgba(0,0,0,.87);
+    text-transform: capitalize;
+    font-weight: bold;
+}
+.ticket .desc {
+    display: block;
+    height: 20px;
+    line-height: 20px;
+    width: 100%;
+    color: rgba(0,0,0,.54);
+    text-transform: capitalize;
+}
+.ticket #datetime {
+    float: right;
+    font-size: 90%;
+    min-width: 188px;
+    margin-right: 16px;
+}
+.ticket .date-created {
+    display: block;
+    margin-top: 12px;
+    height: 20px;
+    line-height: 20px;
+    width: 100%;
+    color: rgba(0,0,0,.54);
+    text-transform: capitalize;
+}
+.ticket .date-checked {
+    display: block;
+    height: 20px;
+    line-height: 20px;
+    width: 100%;
+    color: rgba(0,0,0,.54);
+    text-transform: capitalize;
+}
+.ticket .datetime {
+    float: right;
+}
+.ticket .openinnew {
+    float: right;
+    display: block;
+    height: 40px;
+    width: 40px;
+    line-height: 40px;
+    margin: 12px -10px;
+    padding: 0;
+    border-radius: 50%;
+    text-align: center;
+    transition: all .15s ease-in-out;
+}
+.ticket .openinnew:hover {
+    background: rgba(0,0,0,.12);
+}
+.ticket.open {
+    margin: 40px 20px;
+    width: calc(100% - 40px);
+    height: auto;
+    line-height: normal;
+    padding: 0;
+}
+.ticket.open .id {
+    margin-left: 20px;
+}
+.ticket.open .name {
+    height: 64px;
+    line-height: 64px;
+    display: inline;
+}
+.ticket.open header {
+    position: relative;
+    height: 64px;
+    line-height: 64px;
+}
+.ticket.open article {
+    position: relative;
+    border-top: 1px solid rgba(0,0,0,.12);
+    border-bottom: 1px solid rgba(0,0,0,.12);
+    padding: 0 20px;
+    cursor: initial;
+}
+.ticket.open footer {
+    position: relative;
+    padding: 0 20px;
+    background: #f6f6f6;
+    /*padding: 20px;*/
+    height: 64px;
+    line-height: 64px;
+    cursor: text;
+    transition: all .15s ease-in-out;
+}
+.ticket.open footer:hover {
+    background: white;
+}
+.ticket.open .openinnew {
+    float: right;
+    /*margin-right: 20px;*/
+    margin-right: 10px;
+}
+.ticket.open .delete {
+    float: right;
+    display: block;
+    height: 40px;
+    width: 40px;
+    line-height: 40px;
+    margin: 12px 10px;
+    margin-left: -10px;
+    padding: 0;
+    border-radius: 50%;
+    text-align: center;
+    color: rgba(0,0,0,.54);
+    transition: all .15s ease-in-out;
+}
+.ticket.open .delete:hover {
+    background: rgba(0,0,0,.12);
+}
+.ticket.open .status {
+    float: right;
+    margin: 17px 20px 17px 0;
+}
+.ticket.open .priority {
+    float: right;
+    margin: 17px 20px 17px 0;
+}
+.ticket.open .user-img {
+    height: 40px;
+    width: 40px;
+    border-radius: 50%;
+    margin-top: 16px;
+    /*vertical-align: middle;*/
+}
+.ticket.open .poster-name {
+    position: absolute;
+    top: 20px;
+    left: 80px;
+    text-transform: capitalize;
+    font-weight: bold;
+    font-size: 90%;
+}
+.ticket.open .datetime {
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    color: rgba(0,0,0,.54);
+    font-size: 90%;
+}
+.ticket.open .content {
+    padding: 0;
+    margin: 0 0 20px 60px;
+}
+.ticket.open .tags {
+    height: 20px;
+    line-height: 20px;
+    margin: 0 0 20px 60px;
+}
+.ticket.open .tag {
+    height: 20px;
+    border-radius: 4px;
+    background: #FF6F00;
+    padding: 2px 6px;
+    font-size: 90%;
+    color: white;
+    margin-right: 4px;
+}
+.ticket.open .leavecomment {
+    position: relative;
+    color: rgba(0,0,0,.54);
+    font-size: 90%;
+}
+.ticket.open .viewcomments {
+    float: right;
+    position: relative;
+    background: #FF6F00;
+    text-transform: uppercase;
+    padding: 4px 10px;
+    height: 20px;
+    min-width: 78px;
+    text-align: center;
+    line-height: 20px;
+    /*border-radius: 6px;*/
+    margin: 17px 0;
+    color: white;
+    font-size: 90%;
+    /*cursor: pointer;*/
+}
