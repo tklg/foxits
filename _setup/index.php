@@ -10,8 +10,8 @@ function sanitize($s) {
  	$db = mysqli_connect($dbhost,$dbuname,$dbupass,$dbname);
  	return htmlentities(preg_replace('/\<br(\s*)?\/?\>/i', "\n", mysqli_real_escape_string($db, $s)), ENT_QUOTES);
 }
-if (isset($installed) && $installed) {
-	header("Location: ../index");
+if (isset($installed) && $installed || isset($_SESSION['foxits_done_setup'])) {
+	header("Location: ../dashboard");
 } else if(isset($_POST['connect_database'])) {
 	$dbhost = $_POST['dbhost'];
 	$dbuname = $_POST['dbuser'];
@@ -54,7 +54,6 @@ $installed = true;
 	$gid = $_SESSION['foxits_user_id'];
 	$name = $_SESSION['foxits_user_name'];
 	$email = $_SESSION['foxits_user_email'];
-	$date = date("F j, Y");
 	$sql = "INSERT INTO USERS (google_id, name, email, access_level)
         VALUES (
         '$gid',
@@ -127,6 +126,7 @@ $installed = true;
 	} else {
 		echo mysql_error();
 	}
+	$_SESSION['foxits_done_setup'] = true;
 } else {
 	?>
 <!DOCTYPE html>
@@ -157,7 +157,7 @@ $installed = true;
 		top: 0;bottom:0;margin: auto;
 		-webkit-transition: all .3s ease-in-out;
         transition: all .3s ease;
-        background: #fafafa;
+        background: #f2f2f2;
         padding: 20px;
         padding-top: 30px;
     }
@@ -317,6 +317,7 @@ $installed = true;
     	color: rgba(0,0,0,.54);
     }
 </style>
+<link rel="icon" type="image/ico" href="img/foxits.png">
     <title>FoxITS - Setup</title>
 </head>
 <body>
@@ -390,7 +391,7 @@ $installed = true;
 	}
 	.output-step {
 		padding: 7px;
-		color: white;
+		color: rgba(0,0,0,.87);
 	}
 	.output-status {
 		text-indent: 7px;

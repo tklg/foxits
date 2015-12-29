@@ -1,23 +1,6 @@
 <?php
 session_start();
-
-$uri = $_SERVER['REQUEST_URI'];
-if (strpos($uri, '/') !== false) {
-    $uri = explode('/', $uri);
-    $id = $uri[sizeof($uri) - 1];
-} else {
-    $id = substr($uri, 1);
-}
-if ($id == 'ticket' || $id == '') { // /foxits/ticket , /foxits/ticket/
-	header('HTTP/1.1 400 Bad Request', true, 400);
-	//header("Location: http://" . $_SERVER['HTTP_HOST'] . "/foxits/error?400");
-	header("Location: http://" . $_SERVER['HTTP_HOST'] . "/foxits/tickets");
-	//echo '/ticket requires an id';
-	//http_response_code(400);
-	die();
-}
-
-if (!isset ($_SESSION['foxits_access_token'])) header ("Location: login");
+if (!isset ($_SESSION['foxits_access_token']) && !isset ($_POST['user_name'])) header ("Location: login");
 $userphoto = $_SESSION['foxits_user_picture'];
 $username = $_SESSION['foxits_user_name'];
 ?>
@@ -34,7 +17,7 @@ $username = $_SESSION['foxits_user_name'];
 	88       "8a,   ,a8"  ,d8" "8b,   88       88      Y8a     a8P  
 	88        `"YbbdP"'  8P'     `Y8  88       88       "Y88888P"   
 
-	FoxITS - ticket.php
+	FoxITS - newticket.php
 	Copyright (C) 2015 Theodore Kluge - All Rights Reserved
 	http://tkluge.net
 
@@ -64,81 +47,36 @@ $username = $_SESSION['foxits_user_name'];
 <span class="title">Fox<span id="redfox">ITS</span></span>
 <nav class="nav-horiz" id="nav-top">
 	<ul>
-		<li><a href="../profile"><?php echo $username; ?></a></li>
-		<li><a href="../tickets/create">New ticket</a></li>
-		<li><a href="../dashboard/overview">Dashboard</a></li>
+		<li><a href="../profile/me"><?php echo $username; ?></a></li>
+		<li><a href="#">New ticket</a></li>
+		<li><a href="../dashboard">Dashboard</a></li>
 		<li><a href="../tickets">Tickets</a></li>
 		<li><a href="../oauth.php?logout">Log out</a></li>
 	</ul>
 </nav>
-<nav class="nav-horiz" id="nav-main">
+<!-- <nav class="nav-horiz" id="nav-main">
 	<ul>
-		<li><a href="../tickets/me">Assigned to me</a></li>
-		<li><a href="../tickets/all">All</a></li>
-		<li><a href="../tickets/new">New</a></li>
-		<li><a href="../tickets/open">Open</a></li>
-		<li><a href="../tickets/solved">Solved</a></li>
-		<li><a href="../tickets/hold">On hold</a></li>
+		<li>Open new ticket</li>
 	</ul>
-</nav>
+</nav> -->
 </header>
 <main>
 
-<section class="ticket-container">
-	<section class="ticket-navs">
-		<nav class="nav-small">
-		<span class="text-hint ticket-amount" id="num-tickets">1 comment, 2 participants</span>
-		</nav>
+	<section class="ticket-container">
+		<form class="ticket-new float" onsubmit="return false;" action="newticket.php" method="post">
+			<label for="name">Title</label>
+			<input type="text" class="input" name="name" id="name" />
+			<hr class="input-underline" />
+			<label for="desc">Explain ur problems</label>
+			<textarea id="desc" class="desc"></textarea>
+			<hr class="input-underline" />
+			<label for="tags">Add tags</label>
+			<input type="text" class="input" name="tags" id="tags" />
+			<hr class="input-underline" />
+
+			<button class="btn btn-submit" type="submit">Submit ticket</button>
+		</form>
 	</section>
-	<header class="ticket ticket-thread">
-		<header>
-			<span class="id">#0000000001</span>
-			<span class="name">Name</span>
-			<!-- <a href="ticket/qieyrgfasub"><span class="openinnew material-icons">open_in_new</span></a> -->
-			<span class="delete material-icons">delete</span>
-			<span class="priority priority-normal">normal</span>
-			<span class="status status-new">new</span>
-		</header>
-		<article>
-			<img class="user-img poster-img" alt="profile picture of someone" src="../img/default_avatar.png" />
-			<span class="user-name poster-name">Poster Name</span>
-			<span class="datetime" id="post-date">2015-12-24 19:50:18</span>
-			<p class="content">
-				iasundiuashdadasndoasdopasjmdopa<br>aoidnfiousdbfsndiu
-			</p>
-			<div class="tags">
-				<span class="tag">tag a</span>
-				<span class="tag">tag b</span>
-				<span class="tag">tag c</span>
-			</div>
-		</article>
-	</header>
-	<article class="ticket ticket-thread">
-		<article>
-			<img class="user-img poster-img" alt="profile picture of someone" src="../img/default_avatar.png" />
-			<span class="user-name poster-name">Poster Name</span>
-			<span class="datetime" id="post-date">2015-12-24 19:50:18</span>
-			<p class="content">
-				iasundiuashdadasndoasdopasjmdopa<br>aoidnfiousdbfsndiu
-			</p>
-		</article>
-	</article>
-	<article class="ticket ticket-thread">
-		<article>
-			<img class="user-img poster-img" alt="profile picture of someone" src="../img/default_avatar.png" />
-			<span class="user-name poster-name">Poster Name</span>
-			<span class="datetime" id="post-date">2015-12-24 19:50:18</span>
-			<p class="content">
-				iasundiuashdadasndoasdopasjmdopa<br>aoidnfiousdbfsndiu
-			</p>
-		</article>
-	</article>
-	<footer class="ticket ticket-thread">
-		<footer>
-			<span class="leavecomment">Leave a comment</span>
-		</footer>
-	</footer>
-</section>
 
 </main>
 </body>

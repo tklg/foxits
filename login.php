@@ -2,8 +2,7 @@
 <html>
 <head>
 <meta name="viewport" content="initial-scale=1, width=device-width, maximum-scale=1, minimum-scale=1, user-scalable=no">
-<link rel="stylesheet" href="css/kibbyte.css">
-<link rel="icon" type="image/ico" href="favicon.ico">
+<link rel="icon" type="image/ico" href="img/foxits.png">
 <!-- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.1/css/materialize.min.css"> -->
 <style type="text/css">
 	html, body {
@@ -12,7 +11,7 @@
 		margin: 0;
 		padding: 0;
 		font-family: sans-serif;
-		background: white;
+		background: #f2f2f2;
 	}
     ::selection {
 	color: #00796B;
@@ -20,10 +19,11 @@
 }
 	.wrapper {
 		height: 240px;
+        /*height: 55px;*/
 		width: 360px;
 		position: absolute;
 		top:0;bottom:0;right:0;left:0;margin:auto;
-        background: #fafafa;
+        background: white;
         padding: 20px;
         padding-top: 30px;
     }
@@ -165,21 +165,24 @@
 	<section class="content">
     <form name="login" action="uauth.php" method="post">
 		<section class="inputbar">
-                <input name="address" class="userinfo" id="username" type="text" required pattern="[0-9a-zA-Z][0-9a-zA-Z'\-\. ]*">
-                <label class="placeholder-userinfo nosel" for="username">Username</label>
-                <hr class="input-underline" />
-            </section>
+            <input name="address" class="userinfo" id="username" type="text" required pattern="[0-9a-zA-Z][0-9a-zA-Z'\-\. ]*">
+            <label class="placeholder-userinfo nosel" for="username">Username</label>
+            <hr class="input-underline" />
+        </section>
         <section class="inputbar">
-                <input name="address" class="userinfo" id="userpass" type="text" required>
-                <label class="placeholder-userinfo nosel" for="userpass">Password</label>
-                <hr class="input-underline" />
-            </section>
+            <input name="address" class="userinfo" id="userpass" type="text" required>
+            <label class="placeholder-userinfo nosel" for="userpass">Password</label>
+            <hr class="input-underline" />
+        </section>
         <section class="inputbar inputbar-half nosel nomargin">
             <button class="btn btn-submit btn-flat waves-effect waves-light" type="submit">Sign In</button>
         </section>
         <section class="inputbar inputbar-half nosel nomargin">
             <button class="btn btn-submit btn-flat waves-effect waves-light" type="submit" onclick="window.location = 'oauth.php'; return false">Sign in with Google</button>
         </section>
+        <!-- <section class="inputbar nosel nomargin">
+            <button class="btn btn-submit btn-flat waves-effect waves-light" type="submit" onclick="window.location = 'oauth.php'; return false">Sign in with Google</button>
+        </section> -->
     </form>
 	</section>
 </section>

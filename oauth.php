@@ -66,7 +66,7 @@ if (isset($_GET['code'])) {
 
 	$_SESSION['foxits_refresh_token'] = $refresh_token;
 
-	header("Location: http://" . $_SERVER['HTTP_HOST'] . "/foxits");
+	header("Location: http://" . $_SERVER['HTTP_HOST'] . "/foxits/dashboard");
 	die();
 }
 if (isset($_GET['revoke'])) {

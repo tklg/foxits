@@ -10,11 +10,54 @@ ErrorDocument 502 /foxits/error.php?502
 
   RewriteCond %{SCRIPT_FILENAME} !-d
   RewriteCond %{SCRIPT_FILENAME} !-f
-  RewriteRule ^(.*ticket\/.+)$ ticket.php?id=$1 [NC,L]
+  RewriteRule ^(.*tickets\/create[\/]*)$ newticket.php [NC,L]
+
+  RewriteCond %{SCRIPT_FILENAME} !-d
+  RewriteCond %{SCRIPT_FILENAME} !-f
+  RewriteRule ^(.*tickets[\/]*)$ tickets.php?status=all [NC,L]
+  RewriteCond %{SCRIPT_FILENAME} !-d
+  RewriteCond %{SCRIPT_FILENAME} !-f
+  RewriteRule ^(.*tickets\/all[\/]*)$ tickets.php?status=all [NC,L]
+
+  RewriteCond %{SCRIPT_FILENAME} !-d
+  RewriteCond %{SCRIPT_FILENAME} !-f
+  RewriteRule ^(.*tickets\/new[\/]*.*)$ tickets.php?status=new [NC,L]
+
+  RewriteCond %{SCRIPT_FILENAME} !-d
+  RewriteCond %{SCRIPT_FILENAME} !-f
+  RewriteRule ^(.*tickets\/open[\/]*.*)$ tickets.php?status=open [NC,L]
+
+  RewriteCond %{SCRIPT_FILENAME} !-d
+  RewriteCond %{SCRIPT_FILENAME} !-f
+  RewriteRule ^(.*tickets\/solved[\/]*.*)$ tickets.php?status=solved [NC,L]
+
+  RewriteCond %{SCRIPT_FILENAME} !-d
+  RewriteCond %{SCRIPT_FILENAME} !-f
+  RewriteRule ^(.*tickets\/hold[\/]*.*)$ tickets.php?status=hold [NC,L]
+
+  RewriteCond %{SCRIPT_FILENAME} !-d
+  RewriteCond %{SCRIPT_FILENAME} !-f
+  RewriteRule ^(.*tickets\/me[\/]*.*)$ tickets.php?status=me [NC,L]
+
+  RewriteCond %{SCRIPT_FILENAME} !-d
+  RewriteCond %{SCRIPT_FILENAME} !-f
+  RewriteRule ^(.*dashboard\/.+)$ dashboard.php [NC,L]
+
+  RewriteCond %{SCRIPT_FILENAME} !-d
+  RewriteCond %{SCRIPT_FILENAME} !-f
+  RewriteRule ^(.*profile\/.+)$ profile.php [NC,L]
 
   RewriteCond %{SCRIPT_FILENAME} !-d
   RewriteCond %{SCRIPT_FILENAME} !-f
   RewriteRule ^([^.]+)$ $1.php [NC,L]
+
+  RewriteCond %{SCRIPT_FILENAME} !-d
+  RewriteCond %{SCRIPT_FILENAME} !-f
+  RewriteRule ^(.*[ticket|ticket\/])$ error.php?400 [NC,L]
+  RewriteCond %{SCRIPT_FILENAME} !-d
+  RewriteCond %{SCRIPT_FILENAME} !-f
+  RewriteRule ^(.*ticket\/.+)$ ticket.php?id=$1 [NC,L]
+
 </IfModule>
 
 

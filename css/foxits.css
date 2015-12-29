@@ -20,7 +20,7 @@ text rgba(0,0,0,.87)
 text2 rgba(0,0,0,.54)
 disabled rgba(0,0,0,.38)
 dividers rgba(0,0,0,.12)
-offwhite #FAFAFA
+offwhite #f2f2f2
 */
 /*::-webkit-scrollbar {
     width: 14px;
@@ -104,6 +104,41 @@ header#header-main {
     z-index: 10;
     position: fixed;
 }
+#header-main .title {
+    display: inline-block;
+    height: 60px;
+    line-height: 60px;
+    font-size: 32pt;
+    color: white;
+    padding: 0 64px;
+}
+#header-main #redfox {
+    color: #FFD54F;
+}
+.burger {
+    /*display: block;*/
+    display: none;
+    position: absolute;
+    top: 12px;
+    left: 12px;
+    height: 40px;
+    width: 40px;
+    border-radius: 50%;
+    line-height: 40px;
+    text-align: center;
+    cursor: pointer;
+    transition: all .15s ease-in-out;
+}
+.burger:hover {
+    background: rgba(255,255,255,.15);
+}
+.burger i {
+    color: white;
+    line-height: 40px;
+    height: 40px;
+    width: 40px;
+    text-align: center;
+}
 .nav-horiz {
     position: absolute;
     height: 60px;
@@ -131,11 +166,12 @@ header#header-main {
 }
 .nav-horiz li {
     display: inline-block;
-    padding: 0 24px;
+    /*padding: 0 24px;*/
     color: white;
     font-size: 13pt;
     cursor: pointer;
     transition: all .15s ease;
+    text-align: center;
 }
 .nav-horiz li:hover {
     color: #FFD54F !important;
@@ -148,10 +184,10 @@ header#header-main {
 }*/
 .nav-horiz li a {
     display: inline-block;
+    padding: 0 24px;
     color: white;
     height: 60px;
     line-height: 60px;
-    width: 100%;
 }
 .nav-horiz li a:hover {
     color: #FFD54F;
@@ -160,16 +196,20 @@ header#header-main {
     float: left;
     margin-right: 40px;
 }
-#nav-main li {
+#nav-main li,
+#nav-main li a {
     color: rgba(255,255,255,.7);
 }
 #nav-main li.active {
     border-bottom: 2px solid #FFD54F;
     color: white;
 }
+#nav-main li.active a {
+    color: white;
+}
 #nav-main li a {
-    height: 48px;
-    line-height: 48px;
+    height: 46px;
+    line-height: 46px;
 }
 #nav-main .ticket-search {
     float: right;
@@ -223,17 +263,6 @@ header#header-main {
     transition: all .15s ease-in-out;
     pointer-events: none;
 }
-#header-main .title {
-    display: inline-block;
-    height: 60px;
-    line-height: 60px;
-    font-size: 30pt;
-    color: white;
-    padding: 0 64px;
-}
-#header-main #redfox {
-    color: #FFD54F;
-}
 #nav-sub {
     top: 108px;
     left: 0;
@@ -261,6 +290,7 @@ main {
     width: calc(100% - 40px);
     padding: 20px;
     padding-top: 128px;
+    background: #f2f2f2;
 }
 .nav-small {
     padding: 10px 20px;
@@ -272,6 +302,7 @@ main {
 }
 .ticket-navs {
     position: relative;
+    background: white;
 }
 .ticket-navs::before {
     content: '';
@@ -289,7 +320,7 @@ main {
     display: block;
     height: 100%;
     width: 100%;
-    background: white;
+    /*background: white;*/
 }
 .ticket-container .ticket-search {
     float: right;
@@ -357,6 +388,7 @@ main {
     cursor: pointer;
     /*background: lightblue;*/
     transition: all .15s ease-in-out;
+    white-space: nowrap;
 }
 .ticket:not(.open) .d-open {
     display: none;
@@ -416,6 +448,7 @@ main {
     /*margin: 17px 20px;*/
     margin: 17px 20px 17px 0;
     color: rgba(0,0,0,.87);
+    cursor: pointer;
 }
 .ticket .status-new {
     background: #42A5F5;
@@ -446,6 +479,7 @@ main {
     /*margin: 17px 20px;*/
     margin: 17px 20px 17px 0;
     color: rgba(0,0,0,.87);
+    cursor: pointer;
 }
 .ticket .priority-low {
     background: #8BC34A;
@@ -479,6 +513,9 @@ main {
     color: rgba(0,0,0,.87);
     text-transform: capitalize;
     font-weight: bold;
+    text-overflow: ellpsis;
+    white-space: nowrap;
+    overflow: hidden;
 }
 .ticket .desc {
     display: block;
@@ -587,6 +624,7 @@ main {
     text-align: center;
     color: rgba(0,0,0,.54);
     transition: all .15s ease-in-out;
+    cursor: pointer;
 }
 .ticket.open .delete:hover {
     background: rgba(0,0,0,.12);
@@ -659,4 +697,255 @@ main {
     color: white;
     font-size: 90%;
     /*cursor: pointer;*/
+}
+.ticket-new {
+    padding: 0 20px;
+    padding-bottom: 20px;
+    position: relative;
+    background: white;
+}
+.ticket-new label {
+    width: 100%;
+    display: block;
+    height: 40px;
+    line-height: 40px;
+}
+.ticket-new .input {
+    height: 40px;
+    line-height: 40px;
+    padding: 0 20px;
+    width: calc(100% - 40px);
+    border-bottom: 2px solid rgba(0,0,0,.12);
+    font-size: 11.5pt;
+    z-index: 1;
+}
+.ticket-new .desc {
+    min-height: 200px;
+    width: calc(100% - 40px);
+    padding: 10px 20px;
+    border: none;
+    border-bottom: 2px solid rgba(0,0,0,.12);
+    outline: none;
+    font-size: 11.5pt;
+    font-family: sans-serif;
+}
+hr.input-underline {
+    width: 0;
+    left: calc(50% + 20px);
+    margin-top: -2px;
+    position: absolute;
+    border: none;
+    height: 2px;
+    background: #FF6F00;
+    transition: all .3s ease-in-out;
+    z-index: 2;
+}
+.ticket-new textarea + hr.input-underline {
+    margin-top: -6px;
+}
+.ticket-new input:focus + hr.input-underline,
+.ticket-new textarea:focus + hr.input-underline {
+    left: 20px;
+    width: calc(100% - 40px);
+}
+.ticket-new .btn-submit {
+    padding: 6px 20px;
+    margin: 20px 0 0 0;
+    background: #FF6F00;
+    color: white;
+    text-transform: uppercase;
+    /*float: right;*/
+}
+.ticket-thread {
+    width: 100%;
+    height: auto;
+    line-height: normal;
+    padding: 0;
+}
+.ticket-thread .id {
+    margin-left: 20px;
+}
+.ticket-thread .name {
+    height: 64px;
+    line-height: 64px;
+    display: inline;
+}
+.ticket-thread header {
+    position: relative;
+    height: 64px;
+    line-height: 64px;
+    cursor: initial;
+    border-bottom: 1px solid rgba(0,0,0,.12);
+}
+.ticket-thread article {
+    position: relative;
+/*    border-top: 1px solid rgba(0,0,0,.12);
+    border-bottom: 1px solid rgba(0,0,0,.12);*/
+    border-bottom: 1px solid transparent;
+    padding: 0 20px;
+    cursor: initial;
+}
+.ticket-thread footer {
+    position: relative;
+    padding: 0 20px;
+    background: #f6f6f6;
+    /*padding: 20px;*/
+    height: 64px;
+    line-height: 64px;
+    cursor: text;
+    transition: all .15s ease-in-out;
+}
+.ticket-thread footer:hover {
+    background: white;
+}
+.ticket-thread .delete {
+    float: right;
+    display: block;
+    height: 40px;
+    width: 40px;
+    line-height: 40px;
+    margin: 12px 10px;
+    margin-left: -10px;
+    padding: 0;
+    border-radius: 50%;
+    text-align: center;
+    color: rgba(0,0,0,.54);
+    transition: all .15s ease-in-out;
+    cursor: pointer;
+}
+.ticket-thread .delete:hover {
+    background: rgba(0,0,0,.12);
+}
+.ticket-thread .status {
+    float: right;
+    margin: 17px 20px 17px 0;
+}
+.ticket-thread .priority {
+    float: right;
+    margin: 17px 20px 17px 0;
+}
+.ticket-thread .user-img {
+    height: 40px;
+    width: 40px;
+    border-radius: 50%;
+    margin-top: 16px;
+    /*vertical-align: middle;*/
+}
+.ticket-thread .poster-name {
+    position: absolute;
+    top: 20px;
+    left: 80px;
+    text-transform: capitalize;
+    font-weight: bold;
+    font-size: 90%;
+}
+.ticket-thread .datetime {
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    color: rgba(0,0,0,.54);
+    font-size: 90%;
+}
+.ticket-thread .content {
+    padding: 0;
+    margin: 0 0 20px 60px;
+}
+.ticket-thread .tags {
+    height: 20px;
+    line-height: 20px;
+    margin: 0 0 20px 60px;
+}
+.ticket-thread .tag {
+    height: 20px;
+    border-radius: 4px;
+    background: #FF6F00;
+    padding: 2px 6px;
+    font-size: 90%;
+    color: white;
+    margin-right: 4px;
+}
+.ticket-thread .leavecomment {
+    position: relative;
+    color: rgba(0,0,0,.54);
+    font-size: 90%;
+}
+.overview-item {
+    position: relative;
+    /*width: calc(50% - 40px);*/
+    width: calc(100% - 40px);
+    float: left;
+    /*margin-right: 20px;*/
+    margin-bottom: 20px;
+    background: white;
+    padding: 20px;
+}
+.overview-item.ticket-preview {
+}
+.overview-item.ticket-preview table {
+    width: 100%;
+    margin-top: 10px;
+    text-align: center;
+}
+.overview-item.ticket-preview td {
+    height: 40px;
+    line-height: 40px;
+    width: 20%;
+}
+.overview-item.ticket-preview a {
+    /*padding: 10px 20px;*/
+    display: block;
+    height: 100%;
+    line-height: 100%;
+    width: 100%;
+    color: rgba(0,0,0,.87);
+}
+.overview-item .content {
+    width: 100%;
+    height: 64px;
+    line-height: 64px;
+    color: rgba(0,0,0,.54);
+    text-align: center;
+}
+.user-profile {
+    width: calc(100% - 40%);
+    height: auto;
+    background: white;
+    padding: 20px 20%;
+    position: relative;
+}
+.user-profile .user-img {
+    height: 120px;
+    width: 120px;
+    border-radius: 50%;
+}
+.user-profile .user-name {
+    display: block;
+    height: 40px;
+    line-height: 40px;
+    font-weight: bold;
+    font-size: 13pt;
+    color: rgba(0,0,0,.87);
+    position: absolute;
+    top: 20px;
+    left: calc(20% + 160px);
+}
+.user-profile .user-title {
+    display: block;
+    height: 40px;
+    line-height: 40px;
+    font-weight: bold;
+    font-size: 13pt;
+    color: rgba(0,0,0,.54);
+    position: absolute;
+    top: 60px;
+    left: calc(20% + 160px);
+}
+.user-profile .user-desc {
+    display: block;
+    min-height: 40px;
+    font-size: 13pt;
+    color: rgba(0,0,0,.87);
+    position: absolute;
+    top: 90px;
+    left: calc(20% + 160px);
 }

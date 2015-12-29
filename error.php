@@ -12,7 +12,7 @@
     	color: #ccc;
 		font-family: sans-serif;
 		-webkit-font-smoothing: antialiased;
-		background: white;
+		background: #f2f2f2;
 		overflow: hidden;
         -webkit-touch-callout: none;
     -webkit-user-select: none;
@@ -37,7 +37,7 @@
     	top: 0; bottom: 0; left: 0; right: 0;
     	margin: auto;
         text-align: center;
-        background: #fafafa;
+        background: white;
         padding-top: 40px;
     }
     .errornumber {
@@ -54,7 +54,7 @@
         left: 100px;
     	margin: 0;
         background: #ffc107;
-        color: #fafafa;
+        color: #f2f2f2;
     }
     .errordesc {
         position: absolute;
@@ -82,7 +82,7 @@ button:focus {
 }
 .btn:hover {
     background: #ffc107;
-    color: #fafafa;
+    color: #f2f2f2;
 }
 .btn {
     cursor: pointer;
