@@ -1,6 +1,6 @@
 <?php
 session_start();
-if (!isset ($_SESSION['foxits_access_token']) && !isset ($_POST['user_name'])) header ("Location: login");
+if (!isset ($_SESSION['foxits_access_token'])) header ("Location: login");
 $userphoto = $_SESSION['foxits_user_picture'];
 $username = $_SESSION['foxits_user_name'];
 ?>
@@ -29,6 +29,7 @@ $username = $_SESSION['foxits_user_name'];
     <title>FoxITS</title>
 	<link async href="http://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
 	<link async href='https://fonts.googleapis.com/css?family=Roboto:300' rel='stylesheet' type='text/css'>
+	<link async href='../css/foxits.tagit.css' rel='stylesheet' type='text/css'>
 <!-- 	<link async rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.1/css/materialize.min.css"> -->
 	<link async rel="stylesheet" href="../css/foxits.css">
 	<link rel="icon" type="image/ico" href="../img/foxits.png">
@@ -49,8 +50,8 @@ $username = $_SESSION['foxits_user_name'];
 	<ul>
 		<li><a href="../profile/me"><?php echo $username; ?></a></li>
 		<li><a href="#">New ticket</a></li>
-		<li><a href="../dashboard">Dashboard</a></li>
 		<li><a href="../tickets">Tickets</a></li>
+		<li><a href="../dashboard">Dashboard</a></li>
 		<li><a href="../oauth.php?logout">Log out</a></li>
 	</ul>
 </nav>
@@ -63,35 +64,34 @@ $username = $_SESSION['foxits_user_name'];
 <main>
 
 	<section class="ticket-container">
-		<form class="ticket-new float" onsubmit="return false;" action="newticket.php" method="post">
+		<form class="ticket-new form float" onsubmit="submitNew(); return false;" action="newticket.php" method="post">
 			<label for="name">Title</label>
-			<input type="text" class="input" name="name" id="name" />
+			<input type="text" class="input" name="name" id="name" required />
 			<hr class="input-underline" />
-			<label for="desc">Explain ur problems</label>
+			<label for="desc">A detailed description of the problem</label>
 			<textarea id="desc" class="desc"></textarea>
 			<hr class="input-underline" />
 			<label for="tags">Add tags</label>
 			<input type="text" class="input" name="tags" id="tags" />
 			<hr class="input-underline" />
 
-			<button class="btn btn-submit" type="submit">Submit ticket</button>
+			<button class="btn btn-submit" type="submit" id="btn-submit">Submit ticket</button>
 		</form>
+		<section class="ticket-new sending float">
+			<span class="message">Submitting your ticket...</span>
+			<span class="result success"></span>
+		</section>
 	</section>
 
 </main>
 </body>
 	<script type="text/javascript" src="https://code.jquery.com/jquery-2.1.4.min.js"></script>
-	<!-- <script src="https://code.jquery.com/ui/1.11.4/jquery-ui.min.js"></script> -->
+	<script src="https://code.jquery.com/ui/1.11.4/jquery-ui.min.js"></script>
+	<script src="../js/tag-it.min.js"></script>
 	<!-- <link async rel="stylesheet" type="text/css" href="http://ajax.googleapis.com/ajax/libs/jqueryui/1.7.1/themes/base/jquery-ui.css"/> -->
-	<script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.1/js/materialize.min.js"></script>
+	<!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.1/js/materialize.min.js"></script> -->
     <script src="../js/underscore.min.js"></script>
-    <script src="../js/foxits_ticket.js"></script>
-    <script>
-    var res;
-    $(document).ready(function() {
-
-    });
-    </script>
+    <script src="../js/foxits-newticket.js"></script>
 	
 	<script>
 	  /*(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){

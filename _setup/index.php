@@ -10,7 +10,7 @@ function sanitize($s) {
  	$db = mysqli_connect($dbhost,$dbuname,$dbupass,$dbname);
  	return htmlentities(preg_replace('/\<br(\s*)?\/?\>/i', "\n", mysqli_real_escape_string($db, $s)), ENT_QUOTES);
 }
-if (isset($installed) && $installed || isset($_SESSION['foxits_done_setup'])) {
+if (isset($installed) && $installed && isset($_SESSION['foxits_done_setup'])) {
 	header("Location: ../dashboard");
 } else if(isset($_POST['connect_database'])) {
 	$dbhost = $_POST['dbhost'];
@@ -38,7 +38,8 @@ $installed = true;
     $sql = 'CREATE TABLE USERS (
 	    PID INT NOT NULL AUTO_INCREMENT, 
 	    PRIMARY KEY(PID),
-	    google_id CHAR(21), 
+	    google_id CHAR(21),
+	    google_refresh_token VARCHAR(128),
 	    name VARCHAR(128),
 	    email VARCHAR(128),
 	    access_level TINYINT,
@@ -70,18 +71,17 @@ $installed = true;
 	$sql = 'CREATE TABLE TICKETS (
         PID INT NOT NULL AUTO_INCREMENT, 
         PRIMARY KEY(PID),
-        viewed BOOLEAN,
-		owner TINYINT,
+		owner VARCHAR(128),
+		owner_id CHAR(21),
 		hash CHAR(12),
 		title VARCHAR(128),
-        description TEXT,
         content TEXT,
-        type VARCHAR(32),
         priority VARCHAR(32),
         status VARCHAR(32),
         date_submitted DATETIME DEFAULT CURRENT_TIMESTAMP,
-        date_last_checked DATETIME DEFAULT NULL on update CURRENT_TIMESTAMP,
-        date_completed DATETIME DEFAULT NULL
+        date_last_checked DATETIME DEFAULT NULL,
+        date_completed DATETIME DEFAULT NULL,
+        UNIQUE(PID,hash)
         )';
 	if (mysqli_query($db, $sql)) {
 		echo 0;
@@ -106,7 +106,8 @@ $installed = true;
 	$sql = 'CREATE TABLE TAGS (
         PID INT NOT NULL AUTO_INCREMENT, 
         PRIMARY KEY(PID),
-        name VARCHAR(50)
+        name VARCHAR(50),
+        UNIQUE (PID,name)
         )';
 	if (mysqli_query($db, $sql)) {
 		echo 0;
@@ -126,7 +127,71 @@ $installed = true;
 	} else {
 		echo mysql_error();
 	}
+} else if (isset($_POST['create_table_comments'])) {
+	$db = mysqli_connect($dbhost,$dbuname,$dbupass,$dbname);
+	$sql = 'CREATE TABLE COMMENTS (
+        PID INT NOT NULL AUTO_INCREMENT, 
+        PRIMARY KEY(PID),
+        ticket_hash CHAR(12),
+		owner VARCHAR(128),
+		owner_id CHAR(21),
+        content TEXT,
+        date_submitted DATETIME DEFAULT CURRENT_TIMESTAMP,
+        UNIQUE(PID)
+        )';
+	if (mysqli_query($db, $sql)) {
+		echo 0;
+	} else {
+		echo mysql_error();
+	}
+} else if (isset($_POST['create_table_keys'])) {
+	$db = mysqli_connect($dbhost,$dbuname,$dbupass,$dbname);
+	$sql = 'CREATE TABLE APIKEYS (
+        PID INT NOT NULL AUTO_INCREMENT, 
+        PRIMARY KEY(PID),
+        api_key CHAR(39),
+		owner VARCHAR(128),
+		created_by VARCHAR(128),
+		http_origin VARCHAR(256),
+		create_ticket BOOLEAN,
+		list_tickets BOOLEAN,
+		create_comments BOOLEAN,
+		list_comments BOOLEAN,
+		modify_tickets BOOLEAN,
+		modify_comments BOOLEAN,
+		list_logs BOOLEAN DEFAULT 0,
+		create_key BOOLEAN DEFAULT 0,
+        date_created DATETIME DEFAULT CURRENT_TIMESTAMP,
+        UNIQUE(PID,api_key,owner)
+        )';
+	if (mysqli_query($db, $sql)) {
+		$gid = $_SESSION['foxits_user_id'];
+		$key = 'foxits_'.md5(uniqid(rand(), true));
+		$sql = "INSERT INTO APIKEYS (api_key,owner,created_by,http_origin,create_ticket,list_tickets,create_comments,list_comments,modify_tickets,modify_comments,list_logs,create_key)
+		VALUES (
+        	'$key',
+        	'FoxITS',
+        	'$gid',
+        	'localhost',
+        	1,1,1,1,1,1,1,1
+        )";
+		if (mysqli_query($db, $sql)) {
+			$cfg = array(
+				'logfile'=>'logs/log.txt',
+				'api_key'=>$key
+			);
+			$fp = fopen('../includes/cfg.json', "w");
+	        fwrite($fp, json_encode($cfg));
+	        fclose($fp);
+			echo 0;
+		} else {
+			echo mysql_error();
+		}	
+	} else {
+		echo mysql_error();
+	}
 	$_SESSION['foxits_done_setup'] = true;
+}
 } else {
 	?>
 <!DOCTYPE html>
@@ -326,7 +391,7 @@ $installed = true;
     <form id="install" name="install" action="#" method="post">
 		<?php if (!isset($_SESSION['foxits_user_id'])) { ?>
 		<div class="inputbar nosel">
-			<button class="btn btn-submit" onclick="window.location = 'setupauth'; return false">Sign in with Google</button>
+			<button class="btn btn-submit" onclick="window.location = 'setupauth.php'; return false">Sign in with Google</button>
 		</div>
 		<?php
 		} else if (isset($_SESSION['foxits_user_id'])) { ?>
@@ -440,6 +505,16 @@ $installed = true;
 			<div class="output-status">Waiting...</div>
 			<div class="output-spinner"></div>
 		</div>
+		<div class="inputbar nosel" id="8">
+			<div class="output-step">Create comments table</div>
+			<div class="output-status">Waiting...</div>
+			<div class="output-spinner"></div>
+		</div>
+		<div class="inputbar nosel" id="9">
+			<div class="output-step">Create keys table</div>
+			<div class="output-status">Waiting...</div>
+			<div class="output-spinner"></div>
+		</div>
 	</section>
 <script type="text/javascript" src="https://code.jquery.com/jquery-2.1.4.min.js"></script>
     <script type="text/javascript">
@@ -451,7 +526,7 @@ $installed = true;
     $('input.userinfo').change(function() {
         $(this).attr('empty', ($(this).val() != '') ? 'false' : 'true');
     });
-    var done = [false, false, false, false, false, false, false];
+    var done = [false, false, false, false, false, false, false, false, false];
     $('#install').submit(function(e) {
     	e.preventDefault()
     	install();
@@ -519,8 +594,31 @@ $installed = true;
 															if (errorcode == 0 || done[6]) {
 																done[6] = true;
 																success(7);
-																//closeStat();
-																finish();
+																$.post('index.php',
+																{
+																	create_table_comments: ''
+																},
+																function(errorcode) {
+																	if (errorcode == 0 || done[7]) {
+																		done[7] = true;
+																		success(8);
+																		$.post('index.php',
+																		{
+																			create_table_keys: ''
+																		},
+																		function(errorcode) {
+																			if (errorcode == 0 || done[8]) {
+																				done[8] = true;
+																				success(9);
+																				finish();
+																			} else {
+																				error(9, errorcode);
+																			}
+																		});
+																	} else {
+																		error(8, errorcode);
+																	}
+																});
 															} else {
 																error(7, errorcode);
 															}
@@ -575,7 +673,7 @@ $installed = true;
     	$('.result #'+step+' .output-status').html("Done").addClass('output-status-complete');
     }
     function finish() {
-    	$('#button-submit').html("Done!").attr('onclick', 'window.location = "../index.php"');
+    	$('#button-submit').html("Done!").attr('onclick', 'window.location = "setupauth.php?logout"');
     }
     $('#email').blur(function() {
     	if (/[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?/g.test($('#email').val())) {

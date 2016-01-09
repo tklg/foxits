@@ -64,6 +64,13 @@ if (isset($_GET['code'])) {
 		header('Location: ' . filter_var($auth_url, FILTER_SANITIZE_URL));
 	}
 
+	$cfg_file = file_get_contents('includes/cfg.json');
+	if ($cfg_file != '') {
+		$cfg_file = json_decode($cfg_file, true);
+		$_SESSION['foxits_api_key'] = $cfg_file['api_key'];
+		$_SESSION['foxits_logfile'] = $cfg_file['logfile'];
+	}
+
 	$_SESSION['foxits_refresh_token'] = $refresh_token;
 
 	header("Location: http://" . $_SERVER['HTTP_HOST'] . "/foxits/dashboard");

@@ -41,6 +41,7 @@ if ($id == 'tickets' || $id == '') {
     <title>FoxITS</title>
 	<link async href="http://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
 	<link async href='https://fonts.googleapis.com/css?family=Roboto:300' rel='stylesheet' type='text/css'>
+	<link async href='../css/foxits.tagit.css' rel='stylesheet' type='text/css'>
 <!-- 	<link async rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.1/css/materialize.min.css"> -->
 	<link async rel="stylesheet" href="../css/foxits.css">
 	<link rel="icon" type="image/ico" href="../img/foxits.png">
@@ -56,13 +57,13 @@ if ($id == 'tickets' || $id == '') {
 
 <header id="header-main" class="float-2">
 <span class="burger"><i class="material-icons">menu</i></span>
-<a href="index"><span class="title">Fox<span id="redfox">ITS</span></span></a>
+<a href="../dashboard"><span class="title">Fox<span id="redfox">ITS</span></span></a>
 <nav class="nav-horiz" id="nav-top">
 	<ul>
 		<li><a href="../profile/me"><?php echo $username; ?></a></li>
 		<li><a href="../tickets/create">New ticket</a></li>
-		<li><a href="../dashboard/overview">Dashboard</a></li>
 		<li><a href="../tickets">Tickets</a></li>
+		<li><a href="../dashboard/overview">Dashboard</a></li>
 		<li><a href="../oauth.php?logout">Log out</a></li>
 	</ul>
 </nav>
@@ -102,205 +103,65 @@ if ($id == 'tickets' || $id == '') {
 		</nav>
 	</section>
 	<section class="tickets-list">
-		<article class="ticket" id="ticket-0">	
-			<div class="d-closed">
-				<span id="id" class="id">#0000000000</span>
-				<div class="vertbox" id="namedesc">
-					<span id="title" class="name">Name</span>
-					<span id="desc" class="desc">Opened by Firstname Lastname</span>
-				</div>
-				<a href="../ticket/qieyrgfasub"><span id="openinnew" class="openinnew material-icons">open_in_new</span></a>
-				<div class="vertbox" id="datetime">
-					<span id="date-created" class="date-created">Opened <span class="datetime">2015-12-24 19:50:18</span></span>
-					<span id="date-checked" class="date-checked">Checked <span class="datetime">00-00-0000 00:00:00</span></span>
-				</div>
-				<span id="priority" class="priority priority-low">low</span>
-				<span id="status" class="status status-open">open</span>
-			</div>
-			<div class="d-open">
-			<!-- also this -->
-				<header>
-					<span class="id">#000000000</span>
-					<span class="name">Name</span>
 
-					<!-- <a href="ticket/qieyrgfasub"><span class="openinnew material-icons">open_in_new</span></a> -->
-					<span class="delete material-icons">delete</span>
-					<span class="priority priority-low">low</span>
-					<span class="status status-open">open</span>
-				</header>
-				<article>
-					<img class="user-img poster-img" alt="profile picture of someone" src="../img/default_avatar.png" />
-					<span class="user-name poster-name">Poster Name</span>
-					<span class="datetime" id="post-date">2015-12-24 19:50:18</span>
-					<p class="content">
-						iasundiuashdadasndoasdopasjmdopa<br>aoidnfiousdbfsndiu
-					</p>
-					<div class="tags">
-						<span class="tag">tag a</span>
-						<span class="tag">tag b</span>
-						<span class="tag">tag c</span>
-					</div>
-				</article>
-				<footer>
-					<span class="leavecomment">Leave a comment</span>
-					<a href="../ticket/qieyrgfasub"><span class="btn viewcomments">View all comments</span></a>
-				</footer>
-			</div>
-		</article>
-		<!-- make this minus the inner templates a template -->
-		<article class="ticket" id="ticket-1">
-			<div class="d-closed">
-			<!-- make this a template -->
-				<span id="id" class="id">#0000000001</span>
-				<div class="vertbox" id="namedesc">
-					<span id="title" class="name">Name</span>
-					<span id="desc" class="desc">Opened by Firstname Lastname</span>
-				</div>
-				<a href="../ticket/qieyrgfasub"><span id="openinnew" class="openinnew material-icons">open_in_new</span></a>
-				<div class="vertbox" id="datetime">
-					<span id="date-created" class="date-created">Opened <span class="datetime">2015-12-24 19:50:18</span></span>
-					<span id="date-checked" class="date-checked">Checked <span class="datetime">00-00-0000 00:00:00</span></span>
-				</div>
-				<span id="priority" class="priority priority-normal">normal</span>
-				<span id="status" class="status status-new">new</span>
-			</div>
-			<div class="d-open">
-			<!-- also this -->
-				<header>
-					<span class="id">#0000000001</span>
-					<span class="name">Name</span>
-
-					<!-- <a href="ticket/qieyrgfasub"><span class="openinnew material-icons">open_in_new</span></a> -->
-					<span class="delete material-icons">delete</span>
-					<span class="priority priority-normal">normal</span>
-					<span class="status status-new">new</span>
-				</header>
-				<article>
-					<img class="user-img poster-img" alt="profile picture of someone" src="../img/default_avatar.png" />
-					<span class="user-name poster-name">Poster Name</span>
-					<span class="datetime" id="post-date">2015-12-24 19:50:18</span>
-					<p class="content">
-						iasundiuashdadasndoasdopasjmdopa<br>aoidnfiousdbfsndiu
-					</p>
-					<div class="tags">
-						<span class="tag">tag a</span>
-						<span class="tag">tag b</span>
-						<span class="tag">tag c</span>
-					</div>
-				</article>
-				<footer>
-					<span class="leavecomment">Leave a comment</span>
-					<a href="../ticket/qieyrgfasub"><span class="btn viewcomments">View all comments</span></a>
-				</footer>
-			</div>
-		</article>
-		<article class="ticket" id="ticket-2">
-			<div class="d-closed">
-				<span id="id" class="id">#0000000002</span>
-				<div class="vertbox" id="namedesc">
-					<span id="title" class="name">Name</span>
-					<span id="desc" class="desc">Opened by Firstname Lastname</span>
-				</div>
-				<a href="../ticket/qieyrgfasub"><span id="openinnew" class="openinnew material-icons">open_in_new</span></a>
-				<div class="vertbox" id="datetime">
-					<span id="date-created" class="date-created">Opened <span class="datetime">2015-12-24 19:50:18</span></span>
-					<span id="date-checked" class="date-checked">Checked <span class="datetime">00-00-0000 00:00:00</span></span>
-				</div>
-				<span id="priority" class="priority priority-high">high</span>
-				<span id="status" class="status status-solved">solved</span>
-			</div>
-			<div class="d-open">
-			<!-- also this -->
-				<header>
-					<span class="id">#0000000002</span>
-					<span class="name">Name</span>
-
-					<!-- <a href="ticket/qieyrgfasub"><span class="openinnew material-icons">open_in_new</span></a> -->
-					<span class="delete material-icons">delete</span>
-					<span class="priority priority-high">high</span>
-					<span class="status status-solved">solved</span>
-				</header>
-				<article>
-					<img class="user-img poster-img" alt="profile picture of someone" src="../img/default_avatar.png" />
-					<span class="user-name poster-name">Poster Name</span>
-					<span class="datetime" id="post-date">2015-12-24 19:50:18</span>
-					<p class="content">
-						iasundiuashdadasndoasdopasjmdopa<br>aoidnfiousdbfsndiu
-					</p>
-					<div class="tags">
-						<span class="tag">tag a</span>
-						<span class="tag">tag b</span>
-						<span class="tag">tag c</span>
-					</div>
-				</article>
-				<footer>
-					<span class="leavecomment">Leave a comment</span>
-					<a href="../ticket/qieyrgfasub"><span class="btn viewcomments">View all comments</span></a>
-				</footer>
-			</div>
-		</article>
-		<article class="ticket" id="ticket-3">
-			<div class="d-closed">
-				<span id="id" class="id">#0000000003</span>
-				<div class="vertbox" id="namedesc">
-					<span id="title" class="name">Name</span>
-					<span id="desc" class="desc">Opened by Firstname Lastname</span>
-				</div>
-				<a href="../ticket/qieyrgfasub"><span id="openinnew" class="openinnew material-icons">open_in_new</span></a>
-				<div class="vertbox" id="datetime">
-					<span id="date-created" class="date-created">Opened <span class="datetime">2015-12-24 19:50:18</span></span>
-					<span id="date-checked" class="date-checked">Checked <span class="datetime">00-00-0000 00:00:00</span></span>
-				</div>
-				<span id="priority" class="priority priority-urgent">urgent</span>
-				<span id="status" class="status status-hold">hold</span>
-			</div>
-			<div class="d-open">
-			<!-- also this -->
-				<header>
-					<span class="id">#0000000003</span>
-					<span class="name">Name</span>
-
-					<!-- <a href="ticket/qieyrgfasub"><span class="openinnew material-icons">open_in_new</span></a> -->
-					<span class="delete material-icons">delete</span>
-					<span class="priority priority-urgent">urgent</span>
-					<span class="status status-hold">hold</span>
-				</header>
-				<article>
-					<img class="user-img poster-img" alt="profile picture of someone" src="../img/default_avatar.png" />
-					<span class="user-name poster-name">Poster Name</span>
-					<span class="datetime" id="post-date">2015-12-24 19:50:18</span>
-					<p class="content">
-						iasundiuashdadasndoasdopasjmdopa<br>aoidnfiousdbfsndiu
-					</p>
-					<div class="tags">
-						<span class="tag">tag a</span>
-						<span class="tag">tag b</span>
-						<span class="tag">tag c</span>
-					</div>
-				</article>
-				<footer>
-					<span class="leavecomment">Leave a comment</span>
-					<a href="../ticket/qieyrgfasub"><span class="btn viewcomments">View all comments</span></a>
-				</footer>
-			</div>
-		</article>
 	</section>
 </section>
 
 </main>
 </body>
+<script type="text/template" id="ticket_template">
+	<article class="ticket" id="ticket-<%= id %>">	
+		<div class="d-closed">
+			<span id="id" class="id">#<%= id %></span>
+			<div class="vertbox" id="namedesc">
+				<span id="title" class="name"><%= title %></span>
+				<span id="desc" class="desc">Opened by <a href="../profile/<%= owner_id %>"><%= owner %></a></span>
+			</div>
+			<a href="../ticket/<%= hash %>"><span id="openinnew" class="openinnew material-icons">open_in_new</span></a>
+			<div class="vertbox" id="datetime">
+				<span id="date-created" class="date-created">Opened <span class="datetime"><%= dateCreated %></span></span>
+				<span id="date-checked" class="date-checked">Checked <span class="datetime"><%= dateChecked %></span></span>
+			</div>
+			<span id="priority" class="priority priority-<%= priority %>"><%= priority %></span>
+			<span id="status" class="status status-<%= status %>"><%= status %></span>
+		</div>
+		<div class="d-open">
+			<header>
+				<span class="id">#<%= id %></span>
+				<span class="name"><%= title %></span>
+				<span class="delete material-icons">delete</span>
+				<span class="priority priority-<%= priority %>"><%= priority %></span>
+				<span class="status status-<%= status %>"><%= status %></span>
+			</header>
+			<article>
+				<a href="../profile/<%= owner_id %>"><img class="user-img poster-img" alt="profile picture of someone" src="<%= owner_img %>" /></a>
+				<span class="user-name poster-name"><a href="../profile/<%= owner_id %>"><%= owner %></a></span>
+				<span class="datetime" id="post-date"><%= dateCreated %></span>
+				<p class="content">
+					<%= content %>
+				</p>
+				<ul class="tags">
+					<%= tags %>
+				</ul>
+			</article>
+			<a href="../ticket/<%= hash %>"><footer>
+				<span class="leavecomment">View comments</span>
+				<!-- <a href="../ticket/<%= hash %>"><span class="btn viewcomments">View all comments</span></a> -->
+			</footer></a>
+		</div>
+	</article>
+</script>
 	<script type="text/javascript" src="https://code.jquery.com/jquery-2.1.4.min.js"></script>
-	<!-- <script src="https://code.jquery.com/ui/1.11.4/jquery-ui.min.js"></script> -->
+	<script src="https://code.jquery.com/ui/1.11.4/jquery-ui.min.js"></script>
+	<script src="../js/tag-it.min.js"></script>
 	<!-- <link async rel="stylesheet" type="text/css" href="http://ajax.googleapis.com/ajax/libs/jqueryui/1.7.1/themes/base/jquery-ui.css"/> -->
-	<script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.1/js/materialize.min.js"></script>
+	<!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.1/js/materialize.min.js"></script> -->
     <script src="../js/underscore.min.js"></script>
-    <script src="../js/foxits-tickets.js"></script>
     <script>
-    var res;
-    $(document).ready(function() {
-
-    });
+    var pageID = '<?php echo $id ?>';
+    document.title = 'FoxITS :: ' + pageID;
     </script>
+    <script src="../js/foxits-tickets.js"></script>
 	
 	<script>
 	  /*(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){

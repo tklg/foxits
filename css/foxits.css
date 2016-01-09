@@ -4,8 +4,11 @@ html, body {
 	margin: 0;
 	padding: 0;
 	font-family: 'Roboto', sans-serif;
-	background: white;
+    background: #f2f2f2;
 }
+/** {
+    outline: 1px solid red;
+}*/
 ::selection {
 	color: #00796B;
 	background: #1de986;
@@ -138,6 +141,17 @@ header#header-main {
     height: 40px;
     width: 40px;
     text-align: center;
+}
+.fab {
+    height: 40px;
+    width: 40px;
+    border-radius: 50%;
+    background: #FF6F00;
+    box-shadow: 0 -1px 0 #e5e5e5,0 0 2px rgba(0,0,0,.12),0 2px 4px rgba(0,0,0,.24);
+}
+.fab:hover {
+    background: #FF8F00;
+    box-shadow: 0 0 6px rgba(0,0,0,.16),0 6px 12px rgba(0,0,0,.32);
 }
 .nav-horiz {
     position: absolute;
@@ -411,21 +425,8 @@ main {
     box-shadow: 0 -1px 0 #e5e5e5,0 0 2px rgba(0,0,0,.12),0 2px 4px rgba(0,0,0,.24);
 }
 .ticket.open {
-    /*content: '';
-    position: absolute;
-    display: block;
-    top: 0;
-    bottom: 0;
-    left: 0;
-    right: 0;
-    pointer-events: none;*/
     box-shadow: 0 0 6px rgba(0,0,0,.16),0 6px 12px rgba(0,0,0,.32);
 }
-/*.ticket:last-of-type {
-    height: 64px;
-    line-height: 64px;
-    border: none;
-}*/
 .ticket .id {
     float: left;
     color: rgba(0,0,0,.54);
@@ -486,7 +487,7 @@ main {
     color: white;
 }
 .ticket .priority-normal {
-    background: #FFEE58;
+    background: #FFE258;
     color: white;
 }
 .ticket .priority-high {
@@ -511,11 +512,13 @@ main {
     line-height: 20px;
     /*width: 100%;*/
     color: rgba(0,0,0,.87);
-    text-transform: capitalize;
     font-weight: bold;
     text-overflow: ellpsis;
     white-space: nowrap;
     overflow: hidden;
+}
+.ticket .name::first-letter {
+    text-transform: uppercase;
 }
 .ticket .desc {
     display: block;
@@ -524,6 +527,12 @@ main {
     width: 100%;
     color: rgba(0,0,0,.54);
     text-transform: capitalize;
+}
+.ticket .desc a {
+    color: rgba(0,0,0,.87);
+}
+.ticket .desc:hover a {
+    color: #FF6F00;
 }
 .ticket #datetime {
     float: right;
@@ -562,9 +571,11 @@ main {
     border-radius: 50%;
     text-align: center;
     transition: all .15s ease-in-out;
+    /*color: rgba(0,0,0,.54);*/
 }
 .ticket .openinnew:hover {
     background: rgba(0,0,0,.12);
+    box-shadow: 0 -1px 0 #e5e5e5,0 0 2px rgba(0,0,0,.12),0 2px 4px rgba(0,0,0,.24);
 }
 .ticket.open {
     margin: 40px 20px;
@@ -579,7 +590,11 @@ main {
 .ticket.open .name {
     height: 64px;
     line-height: 64px;
-    display: inline;
+    display: inline-block;
+    margin-top: 0;
+}
+.ticket.open .name::first-letter {
+    text-transform: uppercase;
 }
 .ticket.open header {
     position: relative;
@@ -628,6 +643,7 @@ main {
 }
 .ticket.open .delete:hover {
     background: rgba(0,0,0,.12);
+    box-shadow: 0 -1px 0 #e5e5e5,0 0 2px rgba(0,0,0,.12),0 2px 4px rgba(0,0,0,.24);
 }
 .ticket.open .status {
     float: right;
@@ -643,6 +659,10 @@ main {
     border-radius: 50%;
     margin-top: 16px;
     /*vertical-align: middle;*/
+    transition: all .15s ease-in-out;
+}
+.ticket.open .user-img:hover {
+    box-shadow: 0 -1px 0 #e5e5e5,0 0 2px rgba(0,0,0,.12),0 2px 4px rgba(0,0,0,.24);
 }
 .ticket.open .poster-name {
     position: absolute;
@@ -651,6 +671,12 @@ main {
     text-transform: capitalize;
     font-weight: bold;
     font-size: 90%;
+}
+.ticket.open .poster-name a {
+    color: rgba(0,0,0,.87);
+}
+.ticket.open .poster-name:hover a {
+    color: #FF6F00;
 }
 .ticket.open .datetime {
     position: absolute;
@@ -664,18 +690,26 @@ main {
     margin: 0 0 20px 60px;
 }
 .ticket.open .tags {
+    height: 30px;
+    line-height: 30px;
+    margin: 0 0 20px 60px;
+    padding: 0;
+    color: rgba(0,0,0,.38);
+    background: white;
+}
+.ticket.open .tagit-choice {
     height: 20px;
     line-height: 20px;
-    margin: 0 0 20px 60px;
-}
-.ticket.open .tag {
-    height: 20px;
     border-radius: 4px;
     background: #FF6F00;
     padding: 2px 6px;
     font-size: 90%;
     color: white;
-    margin-right: 4px;
+    margin-right: 6px;
+    cursor: pointer;
+}
+.ticket.open .tagit-choice-read-only ~ .tagit-new {
+    display: none;
 }
 .ticket.open .leavecomment {
     position: relative;
@@ -698,6 +732,9 @@ main {
     font-size: 90%;
     /*cursor: pointer;*/
 }
+.ticket.open .viewcomments:hover {
+    box-shadow: 0 -1px 0 #e5e5e5,0 0 2px rgba(0,0,0,.12),0 2px 4px rgba(0,0,0,.24);
+}
 .ticket-new {
     padding: 0 20px;
     padding-bottom: 20px;
@@ -715,16 +752,24 @@ main {
     line-height: 40px;
     padding: 0 20px;
     width: calc(100% - 40px);
-    border-bottom: 2px solid rgba(0,0,0,.12);
+    border-bottom: 2px solid #f2f2f2;
     font-size: 11.5pt;
     z-index: 1;
+    background: rgba(0,0,0,.12);
+}
+.ticket-new input {
+    /*border-bottom: 2px solid rgba(0,0,0,.38);*/
+}
+.ticket-new textarea {
+    background: rgba(0,0,0,.12);
+    /*border-bottom: 2px solid rgba(0,0,0,.38);*/
 }
 .ticket-new .desc {
     min-height: 200px;
     width: calc(100% - 40px);
     padding: 10px 20px;
     border: none;
-    border-bottom: 2px solid rgba(0,0,0,.12);
+    border-bottom: 2px solid #f2f2f2;
     outline: none;
     font-size: 11.5pt;
     font-family: sans-serif;
@@ -736,7 +781,7 @@ hr.input-underline {
     position: absolute;
     border: none;
     height: 2px;
-    background: #FF6F00;
+    /*background: #FF6F00;*/
     transition: all .3s ease-in-out;
     z-index: 2;
 }
@@ -756,6 +801,30 @@ hr.input-underline {
     text-transform: uppercase;
     /*float: right;*/
 }
+.ticket-new.sending {
+    padding: 0 20px;
+    height: 64px;
+    line-height: 64px;
+    display: none;
+}
+.ticket-new.sending.active {
+    display: block;
+}
+.ticket-new.sending .message {
+    display: inline-block;
+    height: 64px;
+    line-height: 64px;
+    margin: 0;
+    margin-right: 20px;
+}
+.ticket-new.sending .result {
+    display: inline-block;
+    position: absolute;
+    left: 300px;
+    height: 64px;
+    line-height: 64px;
+    color: rgba(0,0,0,.54);
+}
 .ticket-thread {
     width: 100%;
     height: auto;
@@ -769,6 +838,11 @@ hr.input-underline {
     height: 64px;
     line-height: 64px;
     display: inline;
+    display: inline-block;
+    margin-top: 0;
+}
+.ticket-thread .name::first-letter {
+    text-transform: uppercase;
 }
 .ticket-thread header {
     position: relative;
@@ -790,13 +864,101 @@ hr.input-underline {
     padding: 0 20px;
     background: #f6f6f6;
     /*padding: 20px;*/
-    height: 64px;
+    min-height: 64px;
     line-height: 64px;
     cursor: text;
-    transition: all .15s ease-in-out;
+    /*transition: all .2s ease-in-out;*/
 }
 .ticket-thread footer:hover {
     background: white;
+}
+.ticket-thread footer.active {
+    padding: 10px 20px 0 20px;
+    background: white;
+}
+.ticket-thread footer .commentbox {
+    display: none;
+}
+.ticket-thread footer.active .commentbox {
+    display: inline-block;
+    width: 100%;
+    line-height: initial;
+}
+.ticket-thread footer.active .leavecomment {
+    display: none;
+}
+.ticket-thread footer.active header {
+    height: 30px;
+    line-height: 30px;
+    width: calc(100% - 80px);
+    margin: 0;
+    padding: 0 10px 0 60px;
+    border: none;
+    font-size: 90%;
+}
+.ticket-thread footer.active .desc {
+    display: inline-block;
+    height: 32px;
+    line-height: 32px;
+    /*font-size: 90%;*/
+    max-width: 300px;
+    color: rgba(0,0,0,.54);
+    margin-left: 20px;
+    text-transform: lowercase;
+}
+.ticket-thread footer.active .textarea {
+    display: block;
+    margin: 0;
+    margin-left: 60px;
+    margin-right: 60px;
+    width: calc(100% - 120px);
+    min-height: 40px;
+    font-family: 'Helvetica Neue',Helvetica,Arial,sans-serif;
+    font-size: 10pt;
+    outline: none;
+    border: none;
+    line-height: 12pt;
+    overflow: hidden;
+    word-wrap: break-word;
+    word-break: break-word;
+    white-space: normal;
+    cursor: text;
+}
+.ticket-thread footer.active .btn {
+    display: inline-block;
+    margin-left: 60px;
+    text-transform: uppercase;
+    padding: 0 10px;
+    height: 32px;
+    min-width: 78px;
+    text-align: center;
+    line-height: 32px;
+    border-radius: 4px;
+    font-size: 90%;
+    color: rgba(33,33,33,.3);
+    background: #f6f6f6;
+    cursor: initial;
+}
+.ticket-thread footer.active .btn-send.active {
+    color: white;
+    background: #FF6F00;
+    box-shadow: 0 -1px 0 #e5e5e5,0 0 2px rgba(0,0,0,.12),0 2px 4px rgba(0,0,0,.24);
+    cursor: pointer;
+}
+.ticket-thread footer.active .btn-send.active:hover,
+.ticket-thread footer.active .btn-cancel:hover {
+    background: #FF8F00;
+}
+.ticket-thread footer.active .btn-cancel {
+    margin-top: 10px;
+    float: right;
+    background: #FF6F00;
+    color: white;
+    box-shadow: 0 -1px 0 #e5e5e5,0 0 2px rgba(0,0,0,.12),0 2px 4px rgba(0,0,0,.24);
+    cursor: pointer;
+}
+.ticket-thread #sendstatus {
+    max-width: 60px;
 }
 .ticket-thread .delete {
     float: right;
@@ -815,6 +977,7 @@ hr.input-underline {
 }
 .ticket-thread .delete:hover {
     background: rgba(0,0,0,.12);
+    box-shadow: 0 -1px 0 #e5e5e5,0 0 2px rgba(0,0,0,.12),0 2px 4px rgba(0,0,0,.24);
 }
 .ticket-thread .status {
     float: right;
@@ -839,6 +1002,12 @@ hr.input-underline {
     font-weight: bold;
     font-size: 90%;
 }
+.ticket-thread .poster-name a {
+    color: rgba(0,0,0,.87);
+}
+.ticket-thread .poster-name:hover a {
+    color: #FF6F00;
+}
 .ticket-thread .datetime {
     position: absolute;
     top: 20px;
@@ -851,11 +1020,14 @@ hr.input-underline {
     margin: 0 0 20px 60px;
 }
 .ticket-thread .tags {
-    height: 20px;
-    line-height: 20px;
+    height: 30px;
+    line-height: 30px;
     margin: 0 0 20px 60px;
+    padding: 0;
+    color: rgba(0,0,0,.38);
+    background: white;
 }
-.ticket-thread .tag {
+/*.ticket-thread .tag {
     height: 20px;
     border-radius: 4px;
     background: #FF6F00;
@@ -863,6 +1035,20 @@ hr.input-underline {
     font-size: 90%;
     color: white;
     margin-right: 4px;
+}*/
+.ticket-thread ul.tagit li.tagit-choice {
+    height: 20px;
+    line-height: 20px;
+    border-radius: 4px;
+    background: #FF6F00;
+    padding: 2px 6px;
+    font-size: 90%;
+    color: white;
+    margin-right: 6px;
+    cursor: pointer;
+}
+.ticket-thread .tagit-choice-read-only ~ .tagit-new {
+    display: none;
 }
 .ticket-thread .leavecomment {
     position: relative;
@@ -878,6 +1064,10 @@ hr.input-underline {
     margin-bottom: 20px;
     background: white;
     padding: 20px;
+    padding-bottom: 0;
+}
+.overview-item header {
+    font-weight: bold;
 }
 .overview-item.ticket-preview {
 }
@@ -885,6 +1075,7 @@ hr.input-underline {
     width: 100%;
     margin-top: 10px;
     text-align: center;
+    color: rgba(0,0,0,.87);
 }
 .overview-item.ticket-preview td {
     height: 40px;
@@ -903,8 +1094,245 @@ hr.input-underline {
     width: 100%;
     height: 64px;
     line-height: 64px;
-    color: rgba(0,0,0,.54);
+    color: rgba(0,0,0,.38);
     text-align: center;
+    margin-top: 10px;
+}
+.overview-item .desc {
+    display: inline-block;;
+    color: rgba(0,0,0,.54);
+    font-weight: normal;
+    margin-left: 20px;
+}
+.overview-item .fab {
+    position: absolute;
+    right: 10px;
+    top: 10px;
+}
+.api-keys {
+    display: inline-block;
+    background: transparent;
+    box-shadow: none;
+}
+.api-keys header {
+    background: white;
+    box-shadow: 0 -1px 0 #e5e5e5,0 0 2px rgba(0,0,0,.12),0 2px 4px rgba(0,0,0,.24);
+    height: 64px;
+    line-height: 64px;
+    margin: 0 -20px;
+    padding: 0 20px;
+}
+.api-keys .content {
+    margin-top: 0;
+    height: 51px;
+}
+.api-keys .fab {
+    top: 30px;
+    right: 10px;
+}
+.api-keys .keys-list {
+    list-style: none;
+    padding: 0;
+    margin: 0 -20px;
+    /*margin-top: 10px;*/
+    color: rgba(0,0,0,.87);
+    text-align: left;
+}
+.api-keys .key {
+    padding: 0 20px;
+    border-top: 1px solid rgba(0,0,0,.12);
+    min-height: 50px;
+    line-height: 50px;
+    position: relative;
+    cursor: pointer;
+    background: white;
+    transition: all .2s ease-in-out;
+}
+.key::before {
+    content: '';
+    position: absolute;
+    display: block;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    pointer-events: none;
+    box-shadow: 0 -1px 0 #e5e5e5,0 0 2px rgba(0,0,0,.12),0 2px 4px rgba(0,0,0,.24);
+}
+.api-keys .key:not(.open) .d-open {
+    display: none;
+}
+.api-keys .key.open {
+    margin: 40px 20px;
+    width: calc(100% - 80px);
+    height: auto;
+    /*line-height: normal;*/
+    /*padding: 0;*/
+}
+.api-keys .key.open .d-open {
+    cursor: initial;
+}
+.key.open .label {
+    margin-right: 20px;
+}
+.key.open .text-input {
+    float: right;
+}
+.key.open .origin {
+    width: calc(100% - 100px);
+    height: 40px;
+    line-height: 40px;
+    text-indent: 10px;
+    color: rgba(0,0,0,.87);
+    font-size: 11.5pt;
+    background: rgba(0,0,0,.12);
+}
+.key.open input[type=checkbox] {
+    display: none;
+}
+.key.open input[type=checkbox] + label {
+    display: inline-block;
+    height: 16px;
+    line-height: 16px;
+    vertical-align: middle;
+    width: 16px;
+    border-radius: 4px;
+    border: 2px solid rgba(0,0,0,.38);
+    margin: 0;
+    margin-right: 14px;
+    transition: all .15s ease-in-out;
+    cursor: pointer;
+}
+.key.open input[type=checkbox]:checked + label {
+    height: 9px;
+    transform: rotate(-45deg);
+    border-top: 2px solid transparent;
+    border-right: 2px solid transparent;
+    border-bottom: 2px solid #FF6F00;
+    border-left: 2px solid #FF6F00;
+    margin-bottom: 8px;
+}
+.api-keys .create.open {
+    margin: 0 -20px;
+    margin-bottom: 20px;
+    width: 100%;
+    text-align: left;
+    color: rgba(0,0,0,.87);
+}
+.api-keys .create .btn {
+    display: inline-block;
+    text-transform: uppercase;
+    margin-bottom: 20px;
+    padding: 0 10px;
+    height: 32px;
+    min-width: 78px;
+    text-align: center;
+    line-height: 32px;
+    border-radius: 4px;
+    font-size: 90%;
+    color: white;
+    background: #FF6F00;
+    cursor: pointer;
+    box-shadow: 0 -1px 0 #e5e5e5,0 0 2px rgba(0,0,0,.12),0 2px 4px rgba(0,0,0,.24);
+}
+.api-keys .create .btn-cancel {
+    margin-top: 10px;
+    float: right;
+    background: #FF6F00;
+    color: white;
+    box-shadow: 0 -1px 0 #e5e5e5,0 0 2px rgba(0,0,0,.12),0 2px 4px rgba(0,0,0,.24);
+    cursor: pointer;
+}
+.api-keys .create .btn-send:hover,
+.api-keys .create .btn-cancel:hover {
+    background: #FF8F00;
+    box-shadow: 0 0 4px rgba(0,0,0,.14),0 4px 8px rgba(0,0,0,.28);
+}
+.api-keys .create #sendstatus {
+    max-width: 60px;
+}
+.api-keys:not(.creating) .create {
+    display: none;
+}
+.api-keys.creating .fab {
+    display: none;
+}
+/*.api-keys li:last-of-type {
+    border: none;
+}*/
+.api-keys .name {
+    text-align: left;
+}
+.api-keys .datemade {
+    /*position: absolute;*/
+    display: inline-block;
+    /*left: 25%;*/
+    float: right;
+    margin: 0 20px 0 0;
+    width: 144px;
+}
+.api-keys .access-list {
+    /*position: absolute;*/
+    display: inline-block;
+    /*left: 50%;*/
+    float: right;
+    margin: 0 20px 0 0;
+    width: 144px;
+}
+.api-keys .keycode {
+    display: inline-block;
+    float: right;
+    min-width: 300px;
+    cursor: text;
+    margin-right: 100px;
+}
+.api-keys .key .keycode {
+    color: rgba(0,0,0,.54);
+    font-family: monospace;
+    margin-right: 0;
+    font-size: 11.5pt;
+}
+.api-keys .delete,
+.api-keys .regen {
+    display: inline-block;
+    float: right;
+    margin-top: 5px;
+    margin-right: -10px;
+    width: 40px;
+    height: 40px;
+    text-align: center;
+    line-height: 40px;
+    border-radius: 50%;
+    cursor: pointer;
+    color: rgba(0,0,0,.54);
+    transition: all .15s ease-in-out;
+}
+.api-keys .regen {
+    margin-right: 0;
+}
+.api-keys .delete:hover,
+.api-keys .regen:hover {
+    background: rgba(0,0,0,.12);
+    box-shadow: 0 -1px 0 #e5e5e5,0 0 2px rgba(0,0,0,.12),0 2px 4px rgba(0,0,0,.24);
+}
+.log-loc .content,
+.self-key .content {
+    text-align: left;
+    /*float: left;*/
+    font-size: 11.5pt;
+}
+.log-loc input,
+.self-key input {
+    height: 40px;
+    line-height: 40px;
+    font-size: 11.5pt;
+    width: 100%;
+    background: rgba(0,0,0,.12);
+    text-indent: 10px;
+}
+.api-keys label + label {
+    display: inline-block;
+    height: 40px;
 }
 .user-profile {
     width: calc(100% - 40%);
@@ -933,7 +1361,6 @@ hr.input-underline {
     display: block;
     height: 40px;
     line-height: 40px;
-    font-weight: bold;
     font-size: 13pt;
     color: rgba(0,0,0,.54);
     position: absolute;

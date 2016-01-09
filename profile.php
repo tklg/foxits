@@ -43,13 +43,13 @@ $username = $_SESSION['foxits_user_name'];
 
 <header id="header-main" class="float-2">
 <span class="burger"><i class="material-icons">menu</i></span>
-<span class="title">Fox<span id="redfox">ITS</span></span>
+<a href="../dashboard"><span class="title">Fox<span id="redfox">ITS</span></span></a>
 <nav class="nav-horiz" id="nav-top">
 	<ul>
 		<li><a href="../profile/me"><?php echo $username; ?></a></li>
 		<li><a href="../tickets/create">New ticket</a></li>
-		<li><a href="../dashboard/overview">Dashboard</a></li>
 		<li><a href="../tickets">Tickets</a></li>
+		<li><a href="../dashboard/overview">Dashboard</a></li>
 		<li><a href="../oauth.php?logout">Log out</a></li>
 	</ul>
 </nav>
