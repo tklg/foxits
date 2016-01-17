@@ -525,6 +525,116 @@ if ($id == 'newticket') {
 		echo json_encode($res);
 		die();
 	}
+} else if ($id == 'create_key') {
+	if (!isset($_POST['sender'])) {
+		http_response_code(400);
+		$res = array(
+			'status' => '400',
+			'message' => 'POST request must include \'sender\''
+		);
+		echo json_encode($res);
+		die();
+	}
+	if ($_POST['sender'] == 'fromsession')
+		$uid = $_SESSION['foxits_user_id'];
+		$username = $_SESSION['foxits_user_name'];
+	else
+		$uid = sanitize($_POST['sender']);
+		$username = sanitize($_POST['sender']);
+
+	$sql = "SELECT access_level FROM USERS WHERE google_id='$uid'";
+	if ($result = mysqli_query($db, $sql)) {
+		$alvl = mysqli_fetch_object($result)->access_level;
+		if ($alvl < 5) {
+			http_response_code(403);
+			die();
+		}
+	} else {
+		http_response_code(500);
+		$res = array(
+			'status' => '500',
+			'message' => 'Failed to retrieve user rank'
+		);
+		echo json_encode($res);
+		die();
+	}
+	$key = 'foxits_'.md5(uniqid(rand(), true));
+	$origin = sanitize($_POST['http_origin']);
+	$values = $_POST['values'];
+	foreach ($values as $v) {
+		$v = sanitize($v);
+	}
+	$sql = "INSERT INTO APIKEYS (api_key,owner,created_by,http_origin,create_ticket,list_tickets,create_comments,list_comments,modify_tickets,modify_comments,list_logs,create_key)
+		VALUES (
+        	'$key',
+        	'$username',
+        	'$gid',
+        	'$origin',
+        	'$values[0]','$values[1]','$values[2]','$values[3]','$values[4]','$values[5]','$values[6]','$values[7]'
+        )";
+	if ($result = mysqli_query($db, $sql)) {
+		$rows = array(
+			'api_key' => $key,
+			'owner' => $username,
+			'created_by' => $gid,
+			'http_origin' => $origin,
+			'create_ticket' => $values[0],
+			'list_tickets' => $values[1],
+			'create_comments' => $values[2],
+			'list_comments' => $values[3],
+			'modify_tickets' => $values[4],
+			'modify_comments' => $values[5],
+			'list_logs' => $values[6],
+			'create_key' => $values[7]
+			);
+		echo json_encode($rows);
+	} else {
+		http_response_code(500);
+		$res = array(
+			'status' => '500',
+			'message' => 'Failed to add new key'
+		);
+		echo json_encode($res);
+		die();
+	}
+} else if ($id == 'modify_key') {
+	if (!isset($_POST['sender'])) {
+		http_response_code(400);
+		$res = array(
+			'status' => '400',
+			'message' => 'POST request must include \'sender\''
+		);
+		echo json_encode($res);
+		die();
+	}
+	if ($_POST['sender'] == 'fromsession')
+		$uid = $_SESSION['foxits_user_id'];
+		$username = $_SESSION['foxits_user_name'];
+	else
+		$uid = sanitize($_POST['sender']);
+		$username = sanitize($_POST['sender']);
+
+	$sql = "SELECT access_level FROM USERS WHERE google_id='$uid'";
+	if ($result = mysqli_query($db, $sql)) {
+		$alvl = mysqli_fetch_object($result)->access_level;
+		if ($alvl < 5) {
+			http_response_code(403);
+			die();
+		}
+	} else {
+		http_response_code(500);
+		$res = array(
+			'status' => '500',
+			'message' => 'Failed to retrieve user rank'
+		);
+		echo json_encode($res);
+		die();
+	}
+	if (isset($_POST['regen'])) {
+
+	} else {
+
+	}
 }
 
 mysqli_close($db);
